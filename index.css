@@ -1,0 +1,391 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Indie Flower", cursive;
+  background: linear-gradient(to bottom, #f5f5dc, #fffacd);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animation Elements */
+.blossom {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #ffb6c1;
+  border-radius: 50% 0 50% 50%;
+  opacity: 0.7;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.butterfly {
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.butterfly::before,
+.butterfly::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 20px;
+  background-color: #dda0dd;
+  border-radius: 50% 50% 0 50%;
+}
+
+.butterfly::after {
+  right: 0;
+  border-radius: 50% 50% 50% 0;
+  background-color: #98fb98;
+}
+
+.bird {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  background-color: #8b4513;
+  clip-path: polygon(0 50%, 30% 0, 100% 50%, 30% 100%);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.flower {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.flower::before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #ffb6c1;
+  border-radius: 50% 0;
+  transform: rotate(45deg);
+}
+
+.flower::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #98fb98;
+  border-radius: 0 50%;
+  transform: rotate(45deg);
+}
+
+/* Container */
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px dashed #8b4513;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(139, 69, 19, 0.2);
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 1.5s ease-in;
+}
+
+/* Title */
+.title {
+  font-family: "Great Vibes", cursive;
+  font-size: 36px;
+  color: #556b2f;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: leafSway 2s infinite alternate;
+}
+
+/* Input Section */
+.input-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+#task-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #dda0dd;
+  border-radius: 10px;
+  background-color: #fffaf0;
+  font-size: 18px;
+  font-family: "Indie Flower", cursive;
+  outline: none;
+  transition: all 0.3s;
+}
+
+#task-input:focus {
+  border-color: #8b4513;
+  box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+}
+
+#add-button {
+  padding: 12px 20px;
+  background-color: #90ee90;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: "Indie Flower", cursive;
+  transition: all 0.3s;
+}
+
+#add-button:hover {
+  background-color: #7cfc00;
+  transform: scale(1.05);
+}
+
+#add-button:active {
+  transform: scale(0.95);
+}
+
+#task-counter {
+  font-size: 16px;
+  color: #556b2f;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#task-list {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  padding: 12px 15px;
+  background-color: #f0fff0;
+  border: 1px solid #8fbc8f;
+  border-radius: 8px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.task-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-checkbox {
+  margin-right: 15px;
+  width: 20px;
+  height: 20px;
+  accent-color: #dda0dd;
+  cursor: pointer;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 18px;
+  transition: all 0.3s;
+}
+
+.task-text.completed {
+  text-decoration: line-through;
+  color: #a9a9a9;
+}
+
+.delete-button {
+  background-color: #ff6961;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #ff4500;
+  transform: scale(1.1);
+}
+
+#clear-all {
+  background-color: #ff4500;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Indie Flower", cursive;
+  transition: all 0.3s;
+}
+
+#clear-all:hover {
+  background-color: #dc143c;
+  transform: translateY(-2px);
+}
+
+.credit {
+  text-align: center;
+  font-size: 14px;
+  color: #8b4513;
+  animation: bloom 3s infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes leafSway {
+  from {
+    transform: rotate(-2deg);
+  }
+  to {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes bloom {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flutter {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(10px, -10px) rotate(5deg);
+  }
+  50% {
+    transform: translate(20px, 0) rotate(0deg);
+  }
+  75% {
+    transform: translate(10px, 10px) rotate(-5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+@keyframes fly {
+  0% {
+    transform: translateX(-100px) translateY(0);
+  }
+  25% {
+    transform: translateX(25vw) translateY(-20px);
+  }
+  50% {
+    transform: translateX(50vw) translateY(0);
+  }
+  75% {
+    transform: translateX(75vw) translateY(20px);
+  }
+  100% {
+    transform: translateX(100vw) translateY(0);
+  }
+}
+
+@keyframes flowerBloom {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .input-section {
+    flex-direction: column;
+  }
+
+  #add-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
